@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -11,16 +12,26 @@
 
   <title>IDC Garba Raasverse 2026 Scanner</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
+
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       color: white;
+
       text-align: center;
 
       background:
@@ -30,68 +41,120 @@
           #3b1245 42%,
           #17091e 100%
         );
+
     }
 
+
     .screen {
+
       min-height: 100vh;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
+
       padding: 32px 20px;
+
     }
+
 
     .hidden {
       display: none !important;
     }
 
+
     .diya {
+
       font-size: 55px;
+
       margin-bottom: 15px;
+
     }
+
 
     .present {
+
       color: #f3d78a;
+
       font-size: 12px;
+
       font-weight: 800;
+
       letter-spacing: 3px;
+
       margin-bottom: 18px;
+
     }
+
 
     .title {
+
       margin: 0;
+
       color: #fff4cf;
+
       font-size: 39px;
+
       line-height: 1.05;
+
       font-weight: 900;
+
     }
+
 
     .year {
+
       color: #e9b84e;
+
       font-size: 31px;
+
       font-weight: 900;
+
       margin-top: 7px;
+
     }
+
 
     .tagline {
+
       color: #efdcb4;
+
       font-size: 15px;
+
       letter-spacing: 1px;
+
       margin-top: 18px;
+
     }
+
 
     .line {
+
       width: 90px;
+
       height: 2px;
+
       margin: 30px auto;
+
       background: #d7aa4d;
+
     }
 
+
     .button {
+
       width: 100%;
+
       max-width: 340px;
+
       min-height: 60px;
+
       border: 0;
+
       border-radius: 40px;
 
       background:
@@ -102,130 +165,380 @@
         );
 
       color: #32103b;
+
       font-size: 19px;
+
       font-weight: 900;
+
       letter-spacing: 1px;
+
       cursor: pointer;
 
       box-shadow:
         0 10px 30px
         rgba(0, 0, 0, .30);
+
     }
+
 
     .button:active {
       transform: scale(.98);
     }
 
+
     .date {
+
       margin-top: 28px;
+
       color: #d7c4d5;
+
       font-size: 13px;
+
     }
+
 
     .scanner-title {
+
       color: #f3d78a;
+
       font-size: 13px;
+
       font-weight: 800;
+
       letter-spacing: 2px;
+
       margin-bottom: 8px;
+
     }
+
 
     .scanner-heading {
+
       color: #fff4cf;
+
       font-size: 27px;
+
       font-weight: 900;
+
       margin-bottom: 8px;
+
     }
+
 
     .instruction {
+
       color: #dac8d8;
+
       font-size: 14px;
+
       margin-bottom: 20px;
+
     }
 
+
     #reader {
+
       width: 100%;
+
       max-width: 420px;
+
       border-radius: 24px;
+
       overflow: hidden;
+
       background: black;
+
     }
+
 
     #reader video {
       border-radius: 24px;
     }
 
+
     .scanning {
+
       margin-top: 18px;
+
       color: #f3d78a;
+
       font-size: 14px;
+
     }
+
 
     .verifying {
+
       margin-top: 22px;
+
       color: #f4d783;
+
       font-size: 19px;
+
       font-weight: bold;
+
     }
+
 
     .error {
+
       width: 100%;
+
       max-width: 400px;
+
       margin-top: 20px;
+
       padding: 15px;
+
       border-radius: 15px;
-      background: rgba(255, 90, 90, .15);
+
+      background:
+        rgba(
+          255,
+          90,
+          90,
+          .15
+        );
+
       color: #ffaaaa;
+
       font-size: 14px;
+
       line-height: 1.5;
+
     }
 
+
     .cancel {
+
       margin-top: 24px;
-      border: 1px solid rgba(255, 255, 255, .35);
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .35
+        );
+
       border-radius: 30px;
+
       padding: 12px 25px;
+
       background: transparent;
+
       color: white;
+
       font-size: 14px;
+
       cursor: pointer;
+
     }
+
+
+    /* ======================================================
+       RESULT SCREEN
+       ====================================================== */
+
+
+    .result-card {
+
+      width: 100%;
+
+      max-width: 420px;
+
+      padding: 38px 24px;
+
+      border-radius: 30px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .18
+        );
+
+    }
+
+
+    .result-event {
+
+      color: #f6d88c;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 25px;
+
+    }
+
+
+    .result-icon {
+
+      font-size: 65px;
+
+    }
+
+
+    .result-status {
+
+      margin-top: 12px;
+
+      font-size: 28px;
+
+      font-weight: 900;
+
+    }
+
+
+    .result-name {
+
+      margin-top: 30px;
+
+      color: #fff4cf;
+
+      font-size: 29px;
+
+      font-weight: 900;
+
+    }
+
+
+    .result-type {
+
+      display: inline-block;
+
+      margin-top: 14px;
+
+      padding: 7px 18px;
+
+      border:
+        1px solid
+        #d9aa4e;
+
+      border-radius: 30px;
+
+      color: #f6d88c;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      letter-spacing: 2px;
+
+    }
+
+
+    .result-group {
+
+      margin-top: 12px;
+
+      color: #f4dba4;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+    }
+
+
+    .result-message {
+
+      margin-top: 25px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .result-time {
+
+      margin-top: 17px;
+
+      color: #d9c7d7;
+
+      font-size: 13px;
+
+    }
+
+
+    .result-warning {
+
+      margin-top: 18px;
+
+      color: #ff9292;
+
+      font-weight: bold;
+
+    }
+
+
   </style>
+
 </head>
 
 
 <body>
 
-  <!-- WELCOME SCREEN -->
+
+  <!-- ======================================================
+       WELCOME SCREEN
+       ====================================================== -->
+
 
   <div
     id="welcomeScreen"
     class="screen"
   >
 
+
     <div class="diya">
       🪔
     </div>
+
 
     <div class="present">
       INDIAN DANCE CREW PRESENTS
     </div>
 
+
     <h1 class="title">
+
       IDC GARBA
+
       <br>
+
       RAASVERSE
+
     </h1>
+
 
     <div class="year">
       2026
     </div>
 
+
     <div class="tagline">
       ENTER THE WORLD OF GARBA
     </div>
 
+
     <div class="line"></div>
+
 
     <button
       id="scanButton"
@@ -235,33 +548,44 @@
       SCAN PASS
     </button>
 
+
     <div class="date">
       11 OCTOBER 2026 • TOKYO
     </div>
 
+
   </div>
 
 
-  <!-- SCANNER SCREEN -->
+
+  <!-- ======================================================
+       SCANNER SCREEN
+       ====================================================== -->
+
 
   <div
     id="scannerScreen"
     class="screen hidden"
   >
 
+
     <div class="scanner-title">
       IDC GARBA RAASVERSE 2026
     </div>
+
 
     <div class="scanner-heading">
       SCAN ENTRY PASS
     </div>
 
+
     <div class="instruction">
       Place the participant's QR code inside the frame
     </div>
 
+
     <div id="reader"></div>
+
 
     <div
       id="scanningMessage"
@@ -270,6 +594,7 @@
       Looking for QR code...
     </div>
 
+
     <div
       id="verifyMessage"
       class="verifying hidden"
@@ -277,10 +602,12 @@
       ✨ Verifying pass...
     </div>
 
+
     <div
       id="cameraError"
       class="error hidden"
     ></div>
+
 
     <button
       id="cancelButton"
@@ -290,55 +617,255 @@
       CANCEL
     </button>
 
+
   </div>
 
 
-  <!-- QR SCANNER LIBRARY -->
+
+  <!-- ======================================================
+       RESULT SCREEN
+       ====================================================== -->
+
+
+  <div
+    id="resultScreen"
+    class="screen hidden"
+  >
+
+
+    <div class="result-card">
+
+
+      <div class="result-event">
+        IDC GARBA RAASVERSE 2026
+      </div>
+
+
+      <div
+        id="resultIcon"
+        class="result-icon"
+      >
+        ✨
+      </div>
+
+
+      <div
+        id="resultStatus"
+        class="result-status"
+      >
+        ENTRY CONFIRMED
+      </div>
+
+
+      <div
+        id="resultName"
+        class="result-name hidden"
+      ></div>
+
+
+      <div
+        id="resultType"
+        class="result-type hidden"
+      ></div>
+
+
+      <div
+        id="resultGroup"
+        class="result-group hidden"
+      ></div>
+
+
+      <div
+        id="resultMessage"
+        class="result-message"
+      ></div>
+
+
+      <div
+        id="resultTime"
+        class="result-time hidden"
+      ></div>
+
+
+      <div
+        id="resultWarning"
+        class="result-warning hidden"
+      >
+        DO NOT ALLOW ENTRY
+      </div>
+
+
+      <button
+        id="nextButton"
+        class="button"
+        type="button"
+        style="margin-top:35px;"
+      >
+        SCAN NEXT PASS
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- ======================================================
+       QR LIBRARY
+       ====================================================== -->
+
 
   <script
-    src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
-  </script>
+    src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"
+  ></script>
+
 
 
   <script>
 
-    /*
-     * ==========================================
-     * APPS SCRIPT BACKEND
-     * ==========================================
-     *
-     * We will replace this with your real
-     * Apps Script /exec URL.
-     */
+
+    // ======================================================
+    // APPS SCRIPT BACKEND
+    // ======================================================
+
 
     const APPS_SCRIPT_URL =
       'https://script.google.com/macros/s/AKfycbzKpcjtDtmo75CPtmWKxTkSQkw-gWdKc7fAlBUR8ru6lYBxh3MPBKknnTBJl9CKACtA/exec';
 
 
+
+    // ======================================================
+    // STATE
+    // ======================================================
+
+
     let scanner = null;
+
+    let scannerStarted = false;
+
+    let scannerPaused = false;
+
     let scanLocked = false;
+
+    let jsonpScript = null;
+
+    let jsonpTimer = null;
+
+
+
+    // ======================================================
+    // ELEMENTS
+    // ======================================================
 
 
     const welcomeScreen =
-      document.getElementById('welcomeScreen');
+      document.getElementById(
+        'welcomeScreen'
+      );
+
 
     const scannerScreen =
-      document.getElementById('scannerScreen');
+      document.getElementById(
+        'scannerScreen'
+      );
+
+
+    const resultScreen =
+      document.getElementById(
+        'resultScreen'
+      );
+
 
     const scanButton =
-      document.getElementById('scanButton');
+      document.getElementById(
+        'scanButton'
+      );
+
 
     const cancelButton =
-      document.getElementById('cancelButton');
+      document.getElementById(
+        'cancelButton'
+      );
+
+
+    const nextButton =
+      document.getElementById(
+        'nextButton'
+      );
+
 
     const cameraError =
-      document.getElementById('cameraError');
+      document.getElementById(
+        'cameraError'
+      );
+
 
     const scanningMessage =
-      document.getElementById('scanningMessage');
+      document.getElementById(
+        'scanningMessage'
+      );
+
 
     const verifyMessage =
-      document.getElementById('verifyMessage');
+      document.getElementById(
+        'verifyMessage'
+      );
+
+
+    const resultIcon =
+      document.getElementById(
+        'resultIcon'
+      );
+
+
+    const resultStatus =
+      document.getElementById(
+        'resultStatus'
+      );
+
+
+    const resultName =
+      document.getElementById(
+        'resultName'
+      );
+
+
+    const resultType =
+      document.getElementById(
+        'resultType'
+      );
+
+
+    const resultGroup =
+      document.getElementById(
+        'resultGroup'
+      );
+
+
+    const resultMessage =
+      document.getElementById(
+        'resultMessage'
+      );
+
+
+    const resultTime =
+      document.getElementById(
+        'resultTime'
+      );
+
+
+    const resultWarning =
+      document.getElementById(
+        'resultWarning'
+      );
+
+
+
+    // ======================================================
+    // BUTTONS
+    // ======================================================
 
 
     scanButton.addEventListener(
@@ -347,56 +874,112 @@
     );
 
 
-    cancelButton.addEventListener(
+    nextButton.addEventListener(
       'click',
-      async function() {
-
-        await stopScanner();
-
-        scannerScreen
-          .classList
-          .add('hidden');
-
-        welcomeScreen
-          .classList
-          .remove('hidden');
-
-      }
+      scanNextPass
     );
 
 
-    /*
-     * ==========================================
-     * START CAMERA
-     * ==========================================
-     */
+    cancelButton.addEventListener(
+      'click',
+      cancelScanner
+    );
+
+
+
+    // ======================================================
+    // START CAMERA
+    // ======================================================
+
 
     async function startScanner() {
 
-      scanLocked = false;
-
-      cameraError
-        .classList
-        .add('hidden');
-
-      verifyMessage
-        .classList
-        .add('hidden');
-
-      scanningMessage
-        .classList
-        .remove('hidden');
 
       welcomeScreen
         .classList
-        .add('hidden');
+        .add(
+          'hidden'
+        );
+
+
+      resultScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
 
       scannerScreen
         .classList
-        .remove('hidden');
+        .remove(
+          'hidden'
+        );
+
+
+      cameraError
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      verifyMessage
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      scanningMessage
+        .classList
+        .remove(
+          'hidden'
+        );
+
+
+      scanLocked = false;
+
+
+      // Camera already exists.
+      // Do NOT create another one.
+
+      if (
+        scanner &&
+        scannerStarted
+      ) {
+
+
+        if (
+          scannerPaused
+        ) {
+
+          try {
+
+            scanner.resume();
+
+            scannerPaused =
+              false;
+
+          }
+          catch (error) {
+
+            console.log(
+              'Resume error:',
+              error
+            );
+
+          }
+
+        }
+
+
+        return;
+
+      }
 
 
       try {
+
 
         if (
           typeof Html5Qrcode ===
@@ -437,9 +1020,7 @@
           cameras[0].id;
 
 
-        /*
-         * Prefer rear camera on phone.
-         */
+        // Prefer rear camera.
 
         for (
           let i = 0;
@@ -447,17 +1028,25 @@
           i++
         ) {
 
+
           const label =
             String(
-              cameras[i].label || ''
+              cameras[i].label ||
+              ''
             )
             .toLowerCase();
 
 
           if (
-            label.includes('back') ||
-            label.includes('rear') ||
-            label.includes('environment')
+            label.includes(
+              'back'
+            ) ||
+            label.includes(
+              'rear'
+            ) ||
+            label.includes(
+              'environment'
+            )
           ) {
 
             selectedCamera =
@@ -489,8 +1078,11 @@
 
 
             return {
+
               width: size,
+
               height: size
+
             };
 
           }
@@ -507,64 +1099,89 @@
           onScanSuccess,
 
           function() {
-            // Ignore normal scan failures.
+            // Normal QR scan misses are ignored.
           }
 
         );
 
+
+        scannerStarted =
+          true;
+
+
+        scannerPaused =
+          false;
+
+
       }
       catch (error) {
+
 
         console.error(
           'CAMERA ERROR:',
           error
         );
 
+
+        scannerStarted =
+          false;
+
+
         scanningMessage
           .classList
-          .add('hidden');
+          .add(
+            'hidden'
+          );
+
 
         cameraError
           .textContent =
           'Camera could not be opened. Please allow camera access and try again.';
 
+
         cameraError
           .classList
-          .remove('hidden');
+          .remove(
+            'hidden'
+          );
+
 
       }
 
     }
 
 
-    /*
-     * ==========================================
-     * QR SUCCESS
-     * ==========================================
-     */
+
+    // ======================================================
+    // QR FOUND
+    // ======================================================
+
 
     async function onScanSuccess(
       decodedText
     ) {
 
-      if (scanLocked) {
+
+      if (
+        scanLocked
+      ) {
         return;
       }
 
 
-      scanLocked = true;
+      scanLocked =
+        true;
 
 
       const qrValue =
         String(
-          decodedText || ''
+          decodedText ||
+          ''
         )
         .trim();
 
 
-      /*
-       * Only accept IDC 2026 passes.
-       */
+      // Only IDC passes.
 
       if (
         !qrValue.startsWith(
@@ -572,15 +1189,21 @@
         )
       ) {
 
-        cameraError
-          .textContent =
-          '⚠️ This is not an IDC Garba Raasverse 2026 entry pass.';
 
-        cameraError
-          .classList
-          .remove('hidden');
+        pauseScanner();
 
-        scanLocked = false;
+
+        showResult({
+
+          success: false,
+
+          status: 'INVALID',
+
+          message:
+            'This is not an IDC Garba Raasverse 2026 entry pass.'
+
+        });
+
 
         return;
 
@@ -589,148 +1212,871 @@
 
       scanningMessage
         .classList
-        .add('hidden');
-
-      verifyMessage
-        .classList
-        .remove('hidden');
-
-
-      await stopScanner();
-
-
-      /*
-       * Send the QR value to Apps Script.
-       *
-       * Apps Script then checks:
-       *
-       * Ticket ID
-       * Participant name
-       * Check-in status
-       * Duplicate entry
-       */
-
-      const destination =
-        APPS_SCRIPT_URL +
-        '?qr=' +
-        encodeURIComponent(
-          qrValue
+        .add(
+          'hidden'
         );
 
 
-      window.location.href =
-        destination;
+      verifyMessage
+        .classList
+        .remove(
+          'hidden'
+        );
+
+
+      // IMPORTANT:
+      // Pause scanning but DO NOT stop camera.
+
+      pauseScanner();
+
+
+      // Check ticket in background.
+
+      sendQRToBackend(
+        qrValue
+      );
 
     }
 
 
-    /*
-     * ==========================================
-     * STOP CAMERA
-     * ==========================================
-     */
 
-    async function stopScanner() {
+    // ======================================================
+    // PAUSE CAMERA SCANNING
+    // Camera stream stays alive.
+    // ======================================================
 
-      if (!scanner) {
+
+    function pauseScanner() {
+
+
+      if (
+        !scanner ||
+        !scannerStarted ||
+        scannerPaused
+      ) {
         return;
       }
 
 
       try {
 
-        await scanner.stop();
+
+        scanner.pause(
+          true
+        );
+
+
+        scannerPaused =
+          true;
+
 
       }
       catch (error) {
+
+
+        console.log(
+          'Pause error:',
+          error
+        );
+
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // SEND QR TO APPS SCRIPT USING JSONP
+    // ======================================================
+
+
+    function sendQRToBackend(
+      qrValue
+    ) {
+
+
+      cleanupJSONP();
+
+
+      const callbackName =
+        'idcCallback_' +
+        Date.now() +
+        '_' +
+        Math.floor(
+          Math.random() *
+          100000
+        );
+
+
+      window[
+        callbackName
+      ] =
+        function(result) {
+
+
+          cleanupJSONP(
+            callbackName
+          );
+
+
+          showResult(
+            result
+          );
+
+        };
+
+
+      const url =
+        APPS_SCRIPT_URL +
+        '?qr=' +
+        encodeURIComponent(
+          qrValue
+        ) +
+        '&callback=' +
+        encodeURIComponent(
+          callbackName
+        ) +
+        '&t=' +
+        Date.now();
+
+
+      jsonpScript =
+        document.createElement(
+          'script'
+        );
+
+
+      jsonpScript.src =
+        url;
+
+
+      jsonpScript.onerror =
+        function() {
+
+
+          cleanupJSONP(
+            callbackName
+          );
+
+
+          showResult({
+
+            success: false,
+
+            status: 'ERROR',
+
+            message:
+              'Could not verify the pass. Please check the internet connection and try again.'
+
+          });
+
+        };
+
+
+      document.body.appendChild(
+        jsonpScript
+      );
+
+
+      // Timeout after 15 seconds.
+
+      jsonpTimer =
+        setTimeout(
+          function() {
+
+
+            cleanupJSONP(
+              callbackName
+            );
+
+
+            showResult({
+
+              success: false,
+
+              status: 'ERROR',
+
+              message:
+                'Verification timed out. Please scan the pass again.'
+
+            });
+
+
+          },
+          15000
+        );
+
+    }
+
+
+
+    // ======================================================
+    // JSONP CLEANUP
+    // ======================================================
+
+
+    function cleanupJSONP(
+      callbackName
+    ) {
+
+
+      if (
+        jsonpTimer
+      ) {
+
+
+        clearTimeout(
+          jsonpTimer
+        );
+
+
+        jsonpTimer =
+          null;
+
+      }
+
+
+      if (
+        jsonpScript &&
+        jsonpScript.parentNode
+      ) {
+
+
+        jsonpScript
+          .parentNode
+          .removeChild(
+            jsonpScript
+          );
+
+
+      }
+
+
+      jsonpScript =
+        null;
+
+
+      if (
+        callbackName &&
+        window[
+          callbackName
+        ]
+      ) {
+
+
+        try {
+
+          delete window[
+            callbackName
+          ];
+
+        }
+        catch (error) {
+
+          window[
+            callbackName
+          ] =
+            undefined;
+
+        }
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // DISPLAY RESULT
+    // ======================================================
+
+
+    function showResult(
+      result
+    ) {
+
+
+      verifyMessage
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      scannerScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      welcomeScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      resultScreen
+        .classList
+        .remove(
+          'hidden'
+        );
+
+
+      const status =
+        String(
+          result.status ||
+          'INVALID'
+        );
+
+
+      // Defaults = INVALID
+
+      let icon =
+        '⚠️';
+
+
+      let title =
+        'INVALID PASS';
+
+
+      let color =
+        '#FFC96B';
+
+
+      if (
+        status ===
+        'CHECKED_IN'
+      ) {
+
+
+        icon =
+          '✨';
+
+
+        title =
+          'ENTRY CONFIRMED';
+
+
+        color =
+          '#79E39A';
+
+
+      }
+
+
+      if (
+        status ===
+        'ALREADY_USED'
+      ) {
+
+
+        icon =
+          '⛔';
+
+
+        title =
+          'ALREADY CHECKED IN';
+
+
+        color =
+          '#FF7777';
+
+
+      }
+
+
+      if (
+        status ===
+        'ERROR'
+      ) {
+
+
+        icon =
+          '⚠️';
+
+
+        title =
+          'CHECK-IN ERROR';
+
+
+        color =
+          '#FFC96B';
+
+
+      }
+
+
+      resultIcon
+        .textContent =
+        icon;
+
+
+      resultStatus
+        .textContent =
+        title;
+
+
+      resultStatus
+        .style
+        .color =
+        color;
+
+
+
+      // PARTICIPANT NAME
+
+      const participantName =
+        result.participantName
+          ? String(
+              result.participantName
+            )
+            .toUpperCase()
+          : '';
+
+
+      if (
+        participantName
+      ) {
+
+
+        resultName
+          .textContent =
+          participantName;
+
+
+        resultName
+          .classList
+          .remove(
+            'hidden'
+          );
+
+
+      }
+      else {
+
+
+        resultName
+          .classList
+          .add(
+            'hidden'
+          );
+
+
+      }
+
+
+
+      // SOLO / GROUP
+
+      const rawGroupName =
+        result.groupName
+          ? String(
+              result.groupName
+            )
+            .trim()
+          : '';
+
+
+      const hasGroup =
+        rawGroupName &&
+        rawGroupName.toUpperCase() !==
+        'SOLO';
+
+
+      if (
+        participantName
+      ) {
+
+
+        resultType
+          .textContent =
+          hasGroup
+            ? 'GROUP'
+            : 'SOLO';
+
+
+        resultType
+          .classList
+          .remove(
+            'hidden'
+          );
+
+
+      }
+      else {
+
+
+        resultType
+          .classList
+          .add(
+            'hidden'
+          );
+
+
+      }
+
+
+
+      // GROUP NAME
+
+      if (
+        hasGroup
+      ) {
+
+
+        resultGroup
+          .textContent =
+          rawGroupName
+            .toUpperCase();
+
+
+        resultGroup
+          .classList
+          .remove(
+            'hidden'
+          );
+
+
+      }
+      else {
+
+
+        resultGroup
+          .classList
+          .add(
+            'hidden'
+          );
+
+
+      }
+
+
+
+      // MESSAGE
+
+      resultMessage
+        .textContent =
+        result.message ||
+        '';
+
+
+
+      // TIME
+
+      if (
+        result.checkInTime
+      ) {
+
+
+        if (
+          status ===
+          'ALREADY_USED'
+        ) {
+
+
+          resultTime
+            .textContent =
+            'First Entry: ' +
+            result.checkInTime;
+
+
+        }
+        else {
+
+
+          resultTime
+            .textContent =
+            'Checked In: ' +
+            result.checkInTime;
+
+
+        }
+
+
+        resultTime
+          .classList
+          .remove(
+            'hidden'
+          );
+
+
+      }
+      else {
+
+
+        resultTime
+          .classList
+          .add(
+            'hidden'
+          );
+
+
+      }
+
+
+
+      // DUPLICATE WARNING
+
+      if (
+        status ===
+        'ALREADY_USED'
+      ) {
+
+
+        resultWarning
+          .classList
+          .remove(
+            'hidden'
+          );
+
+
+      }
+      else {
+
+
+        resultWarning
+          .classList
+          .add(
+            'hidden'
+          );
+
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // SCAN NEXT PASS
+    // Resume SAME camera.
+    // ======================================================
+
+
+    function scanNextPass() {
+
+
+      resultScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      welcomeScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      scannerScreen
+        .classList
+        .remove(
+          'hidden'
+        );
+
+
+      cameraError
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      verifyMessage
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      scanningMessage
+        .classList
+        .remove(
+          'hidden'
+        );
+
+
+      scanLocked =
+        false;
+
+
+      if (
+        scanner &&
+        scannerStarted &&
+        scannerPaused
+      ) {
+
+
+        try {
+
+
+          scanner.resume();
+
+
+          scannerPaused =
+            false;
+
+
+        }
+        catch (error) {
+
+
+          console.error(
+            'Resume failed:',
+            error
+          );
+
+
+          cameraError
+            .textContent =
+            'Camera session could not resume. Please tap CANCEL and open the scanner again.';
+
+
+          cameraError
+            .classList
+            .remove(
+              'hidden'
+            );
+
+
+        }
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // CANCEL
+    // ======================================================
+
+
+    async function cancelScanner() {
+
+
+      await stopScanner();
+
+
+      scanLocked =
+        false;
+
+
+      scannerScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      resultScreen
+        .classList
+        .add(
+          'hidden'
+        );
+
+
+      welcomeScreen
+        .classList
+        .remove(
+          'hidden'
+        );
+
+    }
+
+
+
+    // ======================================================
+    // FULL STOP
+    // Used ONLY when CANCEL is pressed.
+    // ======================================================
+
+
+    async function stopScanner() {
+
+
+      if (
+        !scanner
+      ) {
+
+        scannerStarted =
+          false;
+
+        scannerPaused =
+          false;
+
+        return;
+
+      }
+
+
+      try {
+
+
+        if (
+          scannerStarted
+        ) {
+
+
+          await scanner.stop();
+
+
+        }
+
+
+      }
+      catch (error) {
+
 
         console.log(
           'Scanner stop:',
           error
         );
 
+
       }
 
 
       try {
 
+
         scanner.clear();
+
 
       }
       catch (error) {
+
 
         console.log(
           'Scanner clear:',
           error
         );
 
+
       }
 
 
-      scanner = null;
+      scanner =
+        null;
+
+
+      scannerStarted =
+        false;
+
+
+      scannerPaused =
+        false;
 
     }
 
-
-    /*
-     * ==========================================
-     * WHEN USER RETURNS TO SCANNER
-     * ==========================================
-     */
-
-window.addEventListener(
-  'pageshow',
-  async function() {
-
-    // Reset scanner lock
-    scanLocked = false;
-
-
-    // Hide verifying message
-    verifyMessage
-      .classList
-      .add('hidden');
-
-
-    // Hide any old camera error
-    cameraError
-      .classList
-      .add('hidden');
-
-
-    // Show normal scanning message again
-    scanningMessage
-      .classList
-      .remove('hidden');
-
-
-    // Make sure old scanner is stopped
-    if (scanner) {
-
-      try {
-        await stopScanner();
-      }
-      catch (error) {
-        console.log(error);
-      }
-
-    }
-
-
-    // Return to welcome screen
-    scannerScreen
-      .classList
-      .add('hidden');
-
-
-    welcomeScreen
-      .classList
-      .remove('hidden');
-
-  }
-);
 
   </script>
+
 
 </body>
 
