@@ -1,978 +1,694 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 12.0px 'Apple Color Emoji'; font-kerning: none}
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  >
+
+  <title>IDC Garba Raasverse 2026 Scanner</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #762467 0%,
+          #3b1245 42%,
+          #17091e 100%
+        );
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .diya {
+      font-size: 55px;
+      margin-bottom: 15px;
+    }
+
+    .present {
+      color: #f3d78a;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+
+    .title {
+      margin: 0;
+      color: #fff4cf;
+      font-size: 39px;
+      line-height: 1.05;
+      font-weight: 900;
+    }
+
+    .year {
+      color: #e9b84e;
+      font-size: 31px;
+      font-weight: 900;
+      margin-top: 7px;
+    }
+
+    .tagline {
+      color: #efdcb4;
+      font-size: 15px;
+      letter-spacing: 1px;
+      margin-top: 18px;
+    }
+
+    .line {
+      width: 90px;
+      height: 2px;
+      margin: 30px auto;
+      background: #d7aa4d;
+    }
+
+    .button {
+      width: 100%;
+      max-width: 340px;
+      min-height: 60px;
+      border: 0;
+      border-radius: 40px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f8db7e,
+          #d69a30
+        );
+
+      color: #32103b;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, .30);
+    }
+
+    .button:active {
+      transform: scale(.98);
+    }
+
+    .date {
+      margin-top: 28px;
+      color: #d7c4d5;
+      font-size: 13px;
+    }
+
+    .scanner-title {
+      color: #f3d78a;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .scanner-heading {
+      color: #fff4cf;
+      font-size: 27px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .instruction {
+      color: #dac8d8;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    #reader {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: black;
+    }
+
+    #reader video {
+      border-radius: 24px;
+    }
+
+    .scanning {
+      margin-top: 18px;
+      color: #f3d78a;
+      font-size: 14px;
+    }
+
+    .verifying {
+      margin-top: 22px;
+      color: #f4d783;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .error {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(255, 90, 90, .15);
+      color: #ffaaaa;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .cancel {
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 30px;
+      padding: 12px 25px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
   </style>
 </head>
+
+
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>name="viewport"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>content="width=device-width, initial-scale=1, maximum-scale=1"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>IDC Garba Raasverse 2026 Scanner</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>* {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 0;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>min-height: 100vh;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Arial,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>sans-serif;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: white;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align: center;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>radial-gradient(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>circle at top,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>#762467 0%,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>#3b1245 42%,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>#17091e 100%</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.screen {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>min-height: 100vh;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display: flex;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>flex-direction: column;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>align-items: center;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content: center;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 32px 20px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hidden {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display: none !important;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.diya {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 52px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 15px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.present {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #f3d78a;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 12px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 800;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing: 3px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 17px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.title {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 0;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #fff4cf;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 39px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height: 1.05;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 900;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.year {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #e9b84e;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 31px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 900;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 6px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.tagline {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #efdcb4;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 16px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 18px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.line {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 90px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height: 2px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 30px auto;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: #d7aa4d;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.button {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 100%;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width: 340px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>min-height: 58px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 0;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 40px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>linear-gradient(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>135deg,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>#f8db7e,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>#d69a30</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #32103b;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 19px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 900;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor: pointer;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-shadow:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>0 10px 30px</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>rgba(0, 0, 0, .30);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.button:active {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transform: scale(.98);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.date {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 27px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #d7c4d5;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 13px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>/* ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>CAMERA SCREEN</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>========================================== */</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.scanner-title {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #f3d78a;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 800;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing: 2px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.scanner-heading {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #fff4cf;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 27px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: 900;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.instruction {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #dac8d8;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#reader {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 100%;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width: 420px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 24px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>overflow: hidden;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: #000;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#reader video {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 24px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.scanning {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 18px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #f3d78a;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.error {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 100%;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width: 400px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 20px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 15px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 15px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>rgba(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>255,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>90,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>90,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>.15</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #ffaaaa;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height: 1.5;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.cancel {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 22px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>rgba(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>255,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>255,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>255,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>.35</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 30px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 12px 25px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: transparent;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: white;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor: pointer;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.verifying {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 20px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #f4d783;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: bold;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 25px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>WELCOME SCREEN</span></p>
-<p class="p1"><span class="s1">====================================================== --&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>id="welcomeScreen"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>class="screen"</span></p>
-<p class="p1"><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="diya"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">🪔</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="present"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>INDIAN DANCE CREW PRESENTS</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h1 class="title"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>IDC GARBA</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>RAASVERSE</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/h1&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="year"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>2026</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="tagline"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>ENTER THE WORLD OF GARBA</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="line"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="scanButton"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="button"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>SCAN PASS</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="date"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>11 OCTOBER 2026</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&amp;nbsp; • &amp;nbsp;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>TOKYO</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>CAMERA SCREEN</span></p>
-<p class="p1"><span class="s1">====================================================== --&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>id="scannerScreen"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>class="screen hidden"</span></p>
-<p class="p1"><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="scanner-title"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>IDC GARBA RAASVERSE 2026</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="scanner-heading"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>SCAN ENTRY PASS</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="instruction"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>Place the participant's QR code inside the frame</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="reader"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="scanningMessage"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="scanning"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>Looking for QR code...</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="verifyMessage"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="verifying hidden"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">✨</span><span class="s1"> Verifying pass...</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="cameraError"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="error hidden"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>id="cancelButton"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>class="cancel"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>type="button"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>CANCEL</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// IMPORTANT:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// REPLACE THIS WITH YOUR APPS SCRIPT /exec URL</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const APPS_SCRIPT_URL =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>'<a href="https://script.google.com/macros/s/AKfycbzKpcjtDtmo75CPtmWKxTkSQkw-gWdKc7fAlBUR8ru6lYBxh3MPBKknnTBJl9CKACtA/exec">https://script.google.com/macros/s/AKfycbzKpcjtDtmo75CPtmWKxTkSQkw-gWdKc7fAlBUR8ru6lYBxh3MPBKknnTBJl9CKACtA/exec</a>';</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>let scanner = null;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>let scanLocked = false;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const welcomeScreen =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'welcomeScreen'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const scannerScreen =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'scannerScreen'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const scanButton =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'scanButton'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const cancelButton =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'cancelButton'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const cameraError =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'cameraError'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const scanningMessage =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'scanningMessage'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const verifyMessage =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'verifyMessage'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// SCAN BUTTON</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>scanButton.addEventListener(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>'click',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>startScanner</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// CANCEL BUTTON</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>cancelButton.addEventListener(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>'click',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>async function() {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>await stopScanner();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scannerScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>welcomeScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// START CAMERA</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>async function startScanner() {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scanLocked = false;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cameraError</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>verifyMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scanningMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>welcomeScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scannerScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scanner =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>new Html5Qrcode(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>'reader'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const cameras =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>await Html5Qrcode</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>.getCameras();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>!cameras ||</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>cameras.length === 0</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>throw new Error(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>'No camera was found on this device.'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>let selectedCamera =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>cameras[0].id;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>// Prefer rear camera</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>for (</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let i = 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>i &lt; cameras.length;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>i++</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const label =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>String(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cameras[i].label || ''</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>.toLowerCase();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>label.includes('back') ||</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>label.includes('rear') ||</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>label.includes('environment')</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>selectedCamera =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cameras[i].id;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>break;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const config = {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>fps: 12,</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>qrbox: function(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>viewfinderWidth,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>viewfinderHeight</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>const size =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Math.floor(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>Math.min(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>viewfinderWidth,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>viewfinderHeight</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>) * .72</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>return {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: size,</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: size</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>aspectRatio:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>1.0</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>await scanner.start(</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>selectedCamera,</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>config,</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>onScanSuccess,</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>// Normal frame-by-frame</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>// QR detection failures ignored.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>catch (error) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>console.error(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>error</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cameraError</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.textContent =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>'Camera could not be opened. Please allow camera access in your browser settings and try again.';</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cameraError</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scanningMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// QR SUCCESS</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>async function onScanSuccess(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>decodedText</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (scanLocked) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scanLocked = true;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scanningMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>verifyMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>await stopScanner();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// ----------------------------------------------------</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// BASIC IDC QR CHECK</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// Avoid sending random QR codes to backend</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// ----------------------------------------------------</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const qrValue =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>String(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>decodedText || ''</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>).trim();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>!qrValue.startsWith(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>'IDC2026|'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cameraError</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.textContent =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>'</span><span class="s2">⚠️</span><span class="s1"> This is not an IDC Garba Raasverse 2026 entry pass.';</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cameraError</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>verifyMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scanLocked = false;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>setTimeout(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>startScanner,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>1800</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// ----------------------------------------------------</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// SEND QR TO YOUR EXISTING APPS SCRIPT BACKEND</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// ----------------------------------------------------</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const destination =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>APPS_SCRIPT_URL +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>'?qr=' +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>encodeURIComponent(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>qrValue</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>window.location.href =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>destination;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// STOP CAMERA</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>async function stopScanner() {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!scanner) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const state =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>scanner.getState();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>state ===</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Html5QrcodeScannerState.SCANNING ||</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>state ===</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Html5QrcodeScannerState.PAUSED</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>await scanner.stop();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scanner.clear();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>catch (error) {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>console.log(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>'Scanner stop:',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>error</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scanner = null;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// WHEN RETURNING FROM RESULT PAGE</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// ======================================================</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>window.addEventListener(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>'pageshow',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function() {</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scanLocked = false;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>verifyMessage</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>scannerScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>welcomeScreen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.classList</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.remove('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+  <!-- WELCOME SCREEN -->
+
+  <div
+    id="welcomeScreen"
+    class="screen"
+  >
+
+    <div class="diya">
+      🪔
+    </div>
+
+    <div class="present">
+      INDIAN DANCE CREW PRESENTS
+    </div>
+
+    <h1 class="title">
+      IDC GARBA
+      <br>
+      RAASVERSE
+    </h1>
+
+    <div class="year">
+      2026
+    </div>
+
+    <div class="tagline">
+      ENTER THE WORLD OF GARBA
+    </div>
+
+    <div class="line"></div>
+
+    <button
+      id="scanButton"
+      class="button"
+      type="button"
+    >
+      SCAN PASS
+    </button>
+
+    <div class="date">
+      11 OCTOBER 2026 • TOKYO
+    </div>
+
+  </div>
+
+
+  <!-- SCANNER SCREEN -->
+
+  <div
+    id="scannerScreen"
+    class="screen hidden"
+  >
+
+    <div class="scanner-title">
+      IDC GARBA RAASVERSE 2026
+    </div>
+
+    <div class="scanner-heading">
+      SCAN ENTRY PASS
+    </div>
+
+    <div class="instruction">
+      Place the participant's QR code inside the frame
+    </div>
+
+    <div id="reader"></div>
+
+    <div
+      id="scanningMessage"
+      class="scanning"
+    >
+      Looking for QR code...
+    </div>
+
+    <div
+      id="verifyMessage"
+      class="verifying hidden"
+    >
+      ✨ Verifying pass...
+    </div>
+
+    <div
+      id="cameraError"
+      class="error hidden"
+    ></div>
+
+    <button
+      id="cancelButton"
+      class="cancel"
+      type="button"
+    >
+      CANCEL
+    </button>
+
+  </div>
+
+
+  <!-- QR SCANNER LIBRARY -->
+
+  <script
+    src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
+  </script>
+
+
+  <script>
+
+    /*
+     * ==========================================
+     * APPS SCRIPT BACKEND
+     * ==========================================
+     *
+     * We will replace this with your real
+     * Apps Script /exec URL.
+     */
+
+    const APPS_SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycbzKpcjtDtmo75CPtmWKxTkSQkw-gWdKc7fAlBUR8ru6lYBxh3MPBKknnTBJl9CKACtA/exec';
+
+
+    let scanner = null;
+    let scanLocked = false;
+
+
+    const welcomeScreen =
+      document.getElementById('welcomeScreen');
+
+    const scannerScreen =
+      document.getElementById('scannerScreen');
+
+    const scanButton =
+      document.getElementById('scanButton');
+
+    const cancelButton =
+      document.getElementById('cancelButton');
+
+    const cameraError =
+      document.getElementById('cameraError');
+
+    const scanningMessage =
+      document.getElementById('scanningMessage');
+
+    const verifyMessage =
+      document.getElementById('verifyMessage');
+
+
+    scanButton.addEventListener(
+      'click',
+      startScanner
+    );
+
+
+    cancelButton.addEventListener(
+      'click',
+      async function() {
+
+        await stopScanner();
+
+        scannerScreen
+          .classList
+          .add('hidden');
+
+        welcomeScreen
+          .classList
+          .remove('hidden');
+
+      }
+    );
+
+
+    /*
+     * ==========================================
+     * START CAMERA
+     * ==========================================
+     */
+
+    async function startScanner() {
+
+      scanLocked = false;
+
+      cameraError
+        .classList
+        .add('hidden');
+
+      verifyMessage
+        .classList
+        .add('hidden');
+
+      scanningMessage
+        .classList
+        .remove('hidden');
+
+      welcomeScreen
+        .classList
+        .add('hidden');
+
+      scannerScreen
+        .classList
+        .remove('hidden');
+
+
+      try {
+
+        if (
+          typeof Html5Qrcode ===
+          'undefined'
+        ) {
+
+          throw new Error(
+            'QR scanner library did not load.'
+          );
+
+        }
+
+
+        scanner =
+          new Html5Qrcode(
+            'reader'
+          );
+
+
+        const cameras =
+          await Html5Qrcode
+            .getCameras();
+
+
+        if (
+          !cameras ||
+          cameras.length === 0
+        ) {
+
+          throw new Error(
+            'No camera found.'
+          );
+
+        }
+
+
+        let selectedCamera =
+          cameras[0].id;
+
+
+        /*
+         * Prefer rear camera on phone.
+         */
+
+        for (
+          let i = 0;
+          i < cameras.length;
+          i++
+        ) {
+
+          const label =
+            String(
+              cameras[i].label || ''
+            )
+            .toLowerCase();
+
+
+          if (
+            label.includes('back') ||
+            label.includes('rear') ||
+            label.includes('environment')
+          ) {
+
+            selectedCamera =
+              cameras[i].id;
+
+            break;
+
+          }
+
+        }
+
+
+        const config = {
+
+          fps: 10,
+
+          qrbox: function(
+            viewfinderWidth,
+            viewfinderHeight
+          ) {
+
+            const size =
+              Math.floor(
+                Math.min(
+                  viewfinderWidth,
+                  viewfinderHeight
+                ) * 0.72
+              );
+
+
+            return {
+              width: size,
+              height: size
+            };
+
+          }
+
+        };
+
+
+        await scanner.start(
+
+          selectedCamera,
+
+          config,
+
+          onScanSuccess,
+
+          function() {
+            // Ignore normal scan failures.
+          }
+
+        );
+
+      }
+      catch (error) {
+
+        console.error(
+          'CAMERA ERROR:',
+          error
+        );
+
+        scanningMessage
+          .classList
+          .add('hidden');
+
+        cameraError
+          .textContent =
+          'Camera could not be opened. Please allow camera access and try again.';
+
+        cameraError
+          .classList
+          .remove('hidden');
+
+      }
+
+    }
+
+
+    /*
+     * ==========================================
+     * QR SUCCESS
+     * ==========================================
+     */
+
+    async function onScanSuccess(
+      decodedText
+    ) {
+
+      if (scanLocked) {
+        return;
+      }
+
+
+      scanLocked = true;
+
+
+      const qrValue =
+        String(
+          decodedText || ''
+        )
+        .trim();
+
+
+      /*
+       * Only accept IDC 2026 passes.
+       */
+
+      if (
+        !qrValue.startsWith(
+          'IDC2026|'
+        )
+      ) {
+
+        cameraError
+          .textContent =
+          '⚠️ This is not an IDC Garba Raasverse 2026 entry pass.';
+
+        cameraError
+          .classList
+          .remove('hidden');
+
+        scanLocked = false;
+
+        return;
+
+      }
+
+
+      scanningMessage
+        .classList
+        .add('hidden');
+
+      verifyMessage
+        .classList
+        .remove('hidden');
+
+
+      await stopScanner();
+
+
+      /*
+       * Send the QR value to Apps Script.
+       *
+       * Apps Script then checks:
+       *
+       * Ticket ID
+       * Participant name
+       * Check-in status
+       * Duplicate entry
+       */
+
+      const destination =
+        APPS_SCRIPT_URL +
+        '?qr=' +
+        encodeURIComponent(
+          qrValue
+        );
+
+
+      window.location.href =
+        destination;
+
+    }
+
+
+    /*
+     * ==========================================
+     * STOP CAMERA
+     * ==========================================
+     */
+
+    async function stopScanner() {
+
+      if (!scanner) {
+        return;
+      }
+
+
+      try {
+
+        await scanner.stop();
+
+      }
+      catch (error) {
+
+        console.log(
+          'Scanner stop:',
+          error
+        );
+
+      }
+
+
+      try {
+
+        scanner.clear();
+
+      }
+      catch (error) {
+
+        console.log(
+          'Scanner clear:',
+          error
+        );
+
+      }
+
+
+      scanner = null;
+
+    }
+
+
+    /*
+     * ==========================================
+     * WHEN USER RETURNS TO SCANNER
+     * ==========================================
+     */
+
+    window.addEventListener(
+      'pageshow',
+      function() {
+
+        scanLocked = false;
+
+      }
+    );
+
+  </script>
+
 </body>
+
 </html>
