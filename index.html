@@ -678,14 +678,57 @@
      * ==========================================
      */
 
-    window.addEventListener(
-      'pageshow',
-      function() {
+window.addEventListener(
+  'pageshow',
+  async function() {
 
-        scanLocked = false;
+    // Reset scanner lock
+    scanLocked = false;
 
+
+    // Hide verifying message
+    verifyMessage
+      .classList
+      .add('hidden');
+
+
+    // Hide any old camera error
+    cameraError
+      .classList
+      .add('hidden');
+
+
+    // Show normal scanning message again
+    scanningMessage
+      .classList
+      .remove('hidden');
+
+
+    // Make sure old scanner is stopped
+    if (scanner) {
+
+      try {
+        await stopScanner();
       }
-    );
+      catch (error) {
+        console.log(error);
+      }
+
+    }
+
+
+    // Return to welcome screen
+    scannerScreen
+      .classList
+      .add('hidden');
+
+
+    welcomeScreen
+      .classList
+      .remove('hidden');
+
+  }
+);
 
   </script>
 
