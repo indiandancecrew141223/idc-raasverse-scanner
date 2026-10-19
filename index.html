@@ -15,7 +15,26 @@
   </title>
 
 
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root { --gold:#f1ca70; --cream:#fff3d2; }
+    .title,.scanner-heading,.year,.present,.scanner-title {font-family:'Cinzel',Georgia,serif;}
+    body {font-family:'DM Sans',Arial,sans-serif !important;}
+    #idcResultPanel {position:relative;overflow:hidden;width:100%;max-width:440px;margin:24px auto 12px;padding:26px 18px 23px;border:2px solid #eac36a;border-radius:23px;background:radial-gradient(circle at 50% -25%,#62366c 0%,#291432 62%,#160c24 100%);box-shadow:0 16px 40px #0006, inset 0 0 0 4px #f6d58c13;text-align:center;color:var(--cream);}
+    #idcResultPanel:before,#idcResultPanel:after {content:'✦ ❋ ✦';display:block;color:#e8b85d;letter-spacing:12px;font-size:17px;margin-bottom:13px;}
+    #idcResultPanel:after {margin:17px 0 0;}
+    .idc-result-kicker {font-family:'Cinzel',Georgia,serif;font-size:11px;letter-spacing:2px;color:#eac36a;font-weight:700;}
+    .idc-result-icon {font-size:42px;margin:8px 0 3px;}
+    .idc-result-title {font-family:'Cinzel',Georgia,serif;font-size:clamp(20px,5vw,28px);font-weight:800;line-height:1.25;color:#ffdf8e;margin:8px 0 12px;}
+    .idc-result-message {font-size:15px;line-height:1.65;color:#fff1df;margin:10px 0;}
+    .idc-result-name {font-family:'Cinzel',Georgia,serif;color:#fff7d9;font-size:clamp(23px,6vw,32px);font-weight:800;overflow-wrap:anywhere;margin:10px 0 16px;text-shadow:0 2px 15px rgba(236,187,95,.35);}
+    .idc-result-meta {font-size:12px;line-height:1.8;color:#d8c8d9;overflow-wrap:anywhere;}
+    .idc-result-note {margin-top:14px;padding:11px;border-radius:12px;background:#e5ba6521;color:#f8d889;font-weight:800;line-height:1.5;}
+    .idc-result-mode {margin-top:13px;font-size:11px;color:#d6c5e2;letter-spacing:.6px;}
+    .idc-result-duplicate {border-color:#e6b25d !important;}
+    .idc-result-error {border-color:#f18b9d !important;}
+    #idcRetryButton {font-family:'Cinzel',Georgia,serif !important;letter-spacing:.5px;border-radius:30px !important;background:linear-gradient(120deg,#fce39a,#d99b3e) !important;box-shadow:0 8px 20px #0005;}
+
 
     * {
       box-sizing: border-box;
@@ -571,12 +590,14 @@
   const resultPanel = document.createElement('div');
   resultPanel.id = 'idcResultPanel';
   resultPanel.setAttribute('role','status');
-  resultPanel.style.cssText = 'display:none;max-width:480px;margin:20px auto;padding:20px;border-radius:16px;background:#18152b;color:#fff;text-align:center;border:1px solid #cba957;white-space:pre-wrap;line-height:1.6';
+  resultPanel.setAttribute('aria-live','polite');
+  resultPanel.style.display = 'none';
   scannerScreen.appendChild(resultPanel);
   const retryButton = document.createElement('button');
+  retryButton.id = 'idcRetryButton';
   retryButton.type = 'button';
-  retryButton.textContent = 'SCAN ANOTHER PASS';
-  retryButton.style.cssText = 'display:none;margin:12px auto;padding:14px 22px;background:#e0b65e;color:#151222;border:0;border-radius:12px;font-weight:700;cursor:pointer';
+  retryButton.textContent = '✦ SCAN ANOTHER PASS ✦';
+  retryButton.style.cssText = 'display:none;margin:12px auto;padding:15px 24px;color:#23112b;border:0;font-weight:800;cursor:pointer';
   scannerScreen.appendChild(retryButton);
   retryButton.addEventListener('click', async () => {
     resultPanel.style.display = 'none';
@@ -590,16 +611,52 @@
     cameraError.classList.add('hidden');
     resultPanel.style.display = 'block';
     retryButton.style.display = 'block';
-    const status = String(result?.status || 'ERROR');
-    const good = result?.success === true;
-    resultPanel.style.borderColor = good ? '#78dba4' : '#f2a0a0';
-    const parts = [good ? '✓ ' + status : '⚠ ' + status];
-    if (result?.participantName) parts.push('Participant: ' + result.participantName);
-    if (result?.ticketId) parts.push('Ticket: ' + result.ticketId);
-    if (result?.groupName) parts.push('Group: ' + result.groupName);
-    parts.push(String(result?.message || 'No response details returned.'));
-    if (!liveMode) parts.push('PREVIEW MODE — no check-in recorded');
-    resultPanel.textContent = parts.join('\n');
+    const status = String(result?.status || 'ERROR').toUpperCase();
+    const msg = String(result?.message || '');
+    const duplicate = /ALREADY|DUPLICATE|CHECKED.IN/i.test(status) || /already checked.in|already used|previously checked.in/i.test(msg);
+    const good = result?.success === true && !duplicate;
+    const successLive = good && liveMode;
+    resultPanel.className = duplicate ? 'idc-result-duplicate' : (good ? '' : 'idc-result-error');
+    let heading, icon, note;
+    if (duplicate) {
+      heading = 'THIS PASS HAS ALREADY ENTERED';
+      icon = '🌙';
+      note = '✨ One pass, one entry — keep the Garba magic fair for everyone!';
+    } else if (successLive) {
+      heading = 'WELCOME TO RAASVERSE 2.0!';
+      icon = '🪔';
+      note = '💃✨ Go rock the Garba floor — let your joy shine under the Sharad Purnima moon! 🌙';
+    } else if (good) {
+      heading = 'PASS VERIFIED!';
+      icon = '✨';
+      note = '🪔 Ready for the Raas! Go rock the Garba floor when you check in!';
+    } else {
+      heading = 'PASS NEEDS ATTENTION';
+      icon = '⚠️';
+      note = 'Please ask the IDC welcome desk for assistance. 🪔';
+    }
+    resultPanel.replaceChildren();
+    const add = (className, value) => {
+      const el = document.createElement('div');
+      el.className = className;
+      el.textContent = value;
+      resultPanel.appendChild(el);
+    };
+    add('idc-result-kicker', '✦ INDIAN DANCE CREW · SHARAD PURNIMA ✦');
+    add('idc-result-icon', icon);
+    add('idc-result-title', heading);
+    // Show the verified participant name prominently on success, preview and duplicate scans.
+    const verifiedName = String(result?.participantName || '').trim();
+    if (verifiedName) {
+      add('idc-result-meta', '✦ PARTICIPANT ✦');
+      add('idc-result-name', verifiedName);
+    }
+    if (duplicate) add('idc-result-message', 'This ticket has already been checked in. Please contact the IDC welcome desk if you need help.');
+    else if (msg && !good) add('idc-result-message', msg);
+    else if (good) add('idc-result-message', successLive ? 'Your entry is confirmed. Let the celebration begin!' : 'Your ticket is valid and ready for event-day entry.');
+    add('idc-result-note', note);
+    if (!liveMode) add('idc-result-mode', '🔎 PREVIEW ONLY · No check-in recorded');
+    else if (!good) add('idc-result-mode', 'NO NEW CHECK-IN RECORDED');
   }
 
   function requestIDCResult(qr, mode) {
