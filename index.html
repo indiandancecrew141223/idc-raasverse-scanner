@@ -659,7 +659,7 @@
     else if (!good) add('idc-result-mode', 'NO NEW CHECK-IN RECORDED');
   }
 
-  function requestIDCResult(qr, mode) {
+  function requestIDCResult(qr, mode, requestId) {
     return new Promise((resolve, reject) => {
       const callbackName = 'idcQRCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
       const tag = document.createElement('script');
@@ -687,7 +687,7 @@
         cleanup();
         reject(new Error('The server did not respond within 60 seconds. Check the sheet before trying again: the ticket may already be checked in.'));
       }, 60000);
-      tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&callback=' + encodeURIComponent(callbackName);
+      tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&requestId=' + encodeURIComponent(requestId || '') + '&callback=' + encodeURIComponent(callbackName);
       document.body.appendChild(tag);
     });
   }
@@ -990,8 +990,17 @@
     const liveMode = new URLSearchParams(window.location.search).get('live') === '1';
     const mode = liveMode ? 'checkin' : 'preview';
     verifyMessage.textContent = liveMode ? '🪔 Checking in your guest… Please wait for the welcome screen. Do not scan again.' : '✨ Verifying your pass…';
+    const requestId = 'scan_' + Date.now() + '_' + Math.random().toString(36).slice(2);
     try {
-      const result = await requestIDCResult(qrValue, mode);
+      let result;
+      try {
+        result = await requestIDCResult(qrValue, mode, requestId);
+      } catch (firstError) {
+        // Retry with the SAME request ID. The backend returns its cached
+        // success if the first response was lost after writing to Sheets.
+        verifyMessage.textContent = '✨ Confirming your entry… Please wait; do not scan again.';
+        result = await requestIDCResult(qrValue, mode, requestId);
+      }
       showIDCResult(result, liveMode);
     } catch (error) {
       showIDCResult({success:false,status:'CONNECTION_ERROR',message:
