@@ -567,6 +567,74 @@
 
 
 
+  // Keep validation and its result on the same mobile page.
+  const resultPanel = document.createElement('div');
+  resultPanel.id = 'idcResultPanel';
+  resultPanel.setAttribute('role','status');
+  resultPanel.style.cssText = 'display:none;max-width:480px;margin:20px auto;padding:20px;border-radius:16px;background:#18152b;color:#fff;text-align:center;border:1px solid #cba957;white-space:pre-wrap;line-height:1.6';
+  scannerScreen.appendChild(resultPanel);
+  const retryButton = document.createElement('button');
+  retryButton.type = 'button';
+  retryButton.textContent = 'SCAN ANOTHER PASS';
+  retryButton.style.cssText = 'display:none;margin:12px auto;padding:14px 22px;background:#e0b65e;color:#151222;border:0;border-radius:12px;font-weight:700;cursor:pointer';
+  scannerScreen.appendChild(retryButton);
+  retryButton.addEventListener('click', async () => {
+    resultPanel.style.display = 'none';
+    retryButton.style.display = 'none';
+    scanLocked = false;
+    await startScanner();
+  });
+
+  function showIDCResult(result, liveMode) {
+    verifyMessage.classList.add('hidden');
+    cameraError.classList.add('hidden');
+    resultPanel.style.display = 'block';
+    retryButton.style.display = 'block';
+    const status = String(result?.status || 'ERROR');
+    const good = result?.success === true;
+    resultPanel.style.borderColor = good ? '#78dba4' : '#f2a0a0';
+    const parts = [good ? '✓ ' + status : '⚠ ' + status];
+    if (result?.participantName) parts.push('Participant: ' + result.participantName);
+    if (result?.ticketId) parts.push('Ticket: ' + result.ticketId);
+    if (result?.groupName) parts.push('Group: ' + result.groupName);
+    parts.push(String(result?.message || 'No response details returned.'));
+    if (!liveMode) parts.push('PREVIEW MODE — no check-in recorded');
+    resultPanel.textContent = parts.join('\n');
+  }
+
+  function requestIDCResult(qr, mode) {
+    return new Promise((resolve, reject) => {
+      const callbackName = 'idcQRCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+      const tag = document.createElement('script');
+      let settled = false;
+      const cleanup = () => {
+        delete window[callbackName];
+        tag.remove();
+        clearTimeout(timeout);
+      };
+      window[callbackName] = (response) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve(response);
+      };
+      tag.onerror = () => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(new Error('The script could not load.'));
+      };
+      const timeout = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(new Error('Request timed out after 15 seconds.'));
+      }, 15000);
+      tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&callback=' + encodeURIComponent(callbackName);
+      document.body.appendChild(tag);
+    });
+  }
+
   // ======================================================
   // SCAN BUTTON
   // ======================================================
@@ -857,20 +925,17 @@
     }
 
 
-    // ----------------------------------------------------
-    // SEND QR TO YOUR EXISTING APPS SCRIPT BACKEND
-    // ----------------------------------------------------
-
-    const destination =
-      APPS_SCRIPT_URL +
-      (new URLSearchParams(window.location.search).get('live') === '1' ? '?mode=checkin&qr=' : '?mode=preview&qr=') +
-      encodeURIComponent(
-        qrValue
-      );
-
-
-    window.location.href =
-      destination;
+    // Query the backend without navigating away from this scanner.
+    // Apps Script supports JSONP via the callback parameter in File 3.
+    const liveMode = new URLSearchParams(window.location.search).get('live') === '1';
+    const mode = liveMode ? 'checkin' : 'preview';
+    try {
+      const result = await requestIDCResult(qrValue, mode);
+      showIDCResult(result, liveMode);
+    } catch (error) {
+      showIDCResult({success:false,status:'CONNECTION_ERROR',message:
+        'Could not contact the RAASVERSE 2.0 backend. Check Web App deployment access (Anyone), deployment version, and IDC2_SPREADSHEET_ID. ' + error.message}, liveMode);
+    }
 
   }
 
