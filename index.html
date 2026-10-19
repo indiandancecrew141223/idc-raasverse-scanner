@@ -685,8 +685,8 @@
         if (settled) return;
         settled = true;
         cleanup();
-        reject(new Error('Request timed out after 15 seconds.'));
-      }, 15000);
+        reject(new Error('The server did not respond within 60 seconds. Check the sheet before trying again: the ticket may already be checked in.'));
+      }, 60000);
       tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&callback=' + encodeURIComponent(callbackName);
       document.body.appendChild(tag);
     });
@@ -932,7 +932,10 @@
       .remove('hidden');
 
 
-    await stopScanner();
+    // Do not wait for camera shutdown before submitting the check-in.
+    // Some phones take several seconds to stop the camera; the lock already
+    // prevents duplicate scans while this request is pending.
+    stopScanner().catch(error => console.warn('Camera stop:', error));
 
 
     // ----------------------------------------------------
@@ -986,12 +989,13 @@
     // Apps Script supports JSONP via the callback parameter in File 3.
     const liveMode = new URLSearchParams(window.location.search).get('live') === '1';
     const mode = liveMode ? 'checkin' : 'preview';
+    verifyMessage.textContent = liveMode ? '🪔 Checking in your guest… Please wait for the welcome screen. Do not scan again.' : '✨ Verifying your pass…';
     try {
       const result = await requestIDCResult(qrValue, mode);
       showIDCResult(result, liveMode);
     } catch (error) {
       showIDCResult({success:false,status:'CONNECTION_ERROR',message:
-        'Could not contact the RAASVERSE 2.0 backend. Check Web App deployment access (Anyone), deployment version, and IDC2_SPREADSHEET_ID. ' + error.message}, liveMode);
+        'The response did not arrive. Do NOT rescan yet: check column Q in the master sheet first, because the check-in may already have been saved. ' + error.message}, liveMode);
     }
 
   }
