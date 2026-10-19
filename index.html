@@ -659,7 +659,7 @@
     else if (!good) add('idc-result-mode', 'NO NEW CHECK-IN RECORDED');
   }
 
-  function requestIDCResult(qr, mode, requestId) {
+  function requestIDCResult(qr, mode) {
     return new Promise((resolve, reject) => {
       const callbackName = 'idcQRCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
       const tag = document.createElement('script');
@@ -685,9 +685,9 @@
         if (settled) return;
         settled = true;
         cleanup();
-        reject(new Error('The server did not respond within 60 seconds. Check the sheet before trying again: the ticket may already be checked in.'));
-      }, 60000);
-      tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&requestId=' + encodeURIComponent(requestId || '') + '&callback=' + encodeURIComponent(callbackName);
+        reject(new Error('Server response was not received. The check-in MAY have been recorded. Check column Q before scanning again.'));
+      }, 45000);
+      tag.src = APPS_SCRIPT_URL + '?mode=' + encodeURIComponent(mode) + '&qr=' + encodeURIComponent(qr) + '&callback=' + encodeURIComponent(callbackName);
       document.body.appendChild(tag);
     });
   }
@@ -932,10 +932,9 @@
       .remove('hidden');
 
 
-    // Do not wait for camera shutdown before submitting the check-in.
-    // Some phones take several seconds to stop the camera; the lock already
-    // prevents duplicate scans while this request is pending.
-    stopScanner().catch(error => console.warn('Camera stop:', error));
+    // Keep the camera from decoding more frames while the first request is pending.
+    // Do not wait for camera shutdown before contacting the backend.
+    const cameraShutdown = stopScanner();
 
 
     // ----------------------------------------------------
@@ -989,22 +988,12 @@
     // Apps Script supports JSONP via the callback parameter in File 3.
     const liveMode = new URLSearchParams(window.location.search).get('live') === '1';
     const mode = liveMode ? 'checkin' : 'preview';
-    verifyMessage.textContent = liveMode ? '🪔 Checking in your guest… Please wait for the welcome screen. Do not scan again.' : '✨ Verifying your pass…';
-    const requestId = 'scan_' + Date.now() + '_' + Math.random().toString(36).slice(2);
     try {
-      let result;
-      try {
-        result = await requestIDCResult(qrValue, mode, requestId);
-      } catch (firstError) {
-        // Retry with the SAME request ID. The backend returns its cached
-        // success if the first response was lost after writing to Sheets.
-        verifyMessage.textContent = '✨ Confirming your entry… Please wait; do not scan again.';
-        result = await requestIDCResult(qrValue, mode, requestId);
-      }
+      const result = await requestIDCResult(qrValue, mode);
       showIDCResult(result, liveMode);
     } catch (error) {
       showIDCResult({success:false,status:'CONNECTION_ERROR',message:
-        'The response did not arrive. Do NOT rescan yet: check column Q in the master sheet first, because the check-in may already have been saved. ' + error.message}, liveMode);
+        'Could not contact the RAASVERSE 2.0 backend. Check Web App deployment access (Anyone), deployment version, and IDC2_SPREADSHEET_ID. ' + error.message}, liveMode);
     }
 
   }
@@ -1071,7 +1060,7 @@
     function() {
 
 
-      scanLocked = false;
+      if (verifyMessage.classList.contains('hidden')) scanLocked = false;
 
 
       verifyMessage
